@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Backend for Ecommerce web page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nijin-P-S/Ecommerce.git"
+  },
+  "author": "Nijin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nijin-P-S/Ecommerce/issues"
+  },
+  "homepage": "https://github.com/Nijin-P-S/Ecommerce#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.24.0"
+  }
+}
