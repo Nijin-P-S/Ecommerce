@@ -16,7 +16,7 @@ class CategoryService{
         .findAll();
     }
 
-    getCategoriesById(id){
+    getCategoryById(id){
         this
         .schema
         .findOne({
