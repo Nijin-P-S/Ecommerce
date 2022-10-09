@@ -4,9 +4,13 @@
 
 const serverConfig = require('./configs/server.config');
 const express = require('express');
+const { categoryRouter }  = require('./controllers/category.controller');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use('/category', categoryRouter);
 // app.get('/', (request, response) => {
 //     response.writeHead(200);
 //     response.end();
