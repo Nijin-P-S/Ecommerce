@@ -7,7 +7,8 @@ class ProductService{
     }
      
     createProduct(product){
-        return this.schema
+        return this
+        .schema
         .create(product);
     }
 
@@ -25,7 +26,7 @@ class ProductService{
     }
 
     getProductById(id){
-        this
+        return this
         .schema
         .findOne({
             where : {
@@ -39,6 +40,29 @@ class ProductService{
             ]
         })
     }
+
+    updateProduct(updatedProduct, id){
+        return this.schema
+        .update(
+            updatedProduct, {
+                returning : true,
+                where : {
+                    id : id
+                }
+            }
+        )
+    }
+
+    deleteProductById(id){
+        return this
+        .schema
+        .destroy({
+            where : {
+                id : id
+            }
+        });
+    }
+
 }
 
 
