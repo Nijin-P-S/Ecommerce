@@ -1,38 +1,27 @@
-const {sequelize} = require('./../connections/sequelize.connection');
-const {DataTypes} = require('sequelize');
+const {DataTypes, FLOAT} = require('sequelize');
 
-function initializeProductSchema(){
-    const productSchema = sequelize.define("product",
-    {
-        id : {
+module.exports = (sequelize, Sequelize) => {
+    const Product = sequelize.define('product',{
+        id: {
             type : DataTypes.TINYINT,
-            allowNull : false,
-            autoIncrement : true,
-            primaryKey : true
+            primaryKey : true,
+            autoIncrement : true
         },
-        name : {
+        name: {
             type : DataTypes.STRING,
             allowNull : false
         },
+        description: {
+            type : DataTypes.STRING
+        },
         price : {
             type : DataTypes.FLOAT,
-            allowNull : false,
-            defaultValue : 0.0
-        },
-        category_id : {
-            type : DataTypes.TINYINT,
             allowNull : false
-        },
-        created_at : {
-            type : DataTypes.DATE,
-            defaultValue : sequelize.fn('NOW')
         }
-    })
-    return productSchema;
+    },
+    {
+        tableName : 'products'
+    }
+    );
+    return Product;
 }
-
- let productSchema = initializeProductSchema();
-
- module.exports = {
-    productSchema
-};
