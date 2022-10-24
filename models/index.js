@@ -1,15 +1,17 @@
-const config = require("../configs/db.config");
-const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development'
+const config = require("../configs/db.config")[env];
+const Sequelize = require("sequelize");
 
+console.log(env);
 const sequelize = new Sequelize(
-    config.DB,
-    config.USER,
-    config.PASSWORD,
+    config.database,
+    config.username,
+    config.password,
     {
-        host: config.HOST,
+        host: config.host,
         dialect: config.dialect,
-        operatorAliases: false,
-        pool:{
+        operatorsAliases: false,
+        pool: {
             max: config.pool.max,
             min: config.pool.min,
             acquire: config.pool.acquire,
@@ -18,24 +20,49 @@ const sequelize = new Sequelize(
     }
 );
 
-const db = {}
+const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+let category = require('./category.model')(sequelize, Sequelize);
+let product = require('./product.model')(sequelize, Sequelize);
+let user = require('./user.model')(sequelize, Sequelize);
+let role = require('./role.model')(sequelize, Sequelize);
+let cart = require('./cart.model')(sequelize, Sequelize);
 
-//Here we are grabbing a function and caling a function
-//Here when index.js is initialized, all our schemas will also be initialized
-let category = db.category = require('./category.model')(sequelize, Sequelize);
-let product = db.product = require('./product.model')(sequelize, Sequelize);
+category.hasMany(product);
+product.belongsTo(category);
 
-category.hasMany(product, {
-    foriegnKey: 'category_id'
+role.belongsToMany(user, {
+    through: 'user_roles',
+    foreignKey: 'roleId',
+    otherKey: 'userId'
 });
 
-product.belongsTo('category', {
-    foriegnKey : 'category_id'
+user.belongsToMany(role, {
+    through: 'user_roles',
+    foreignKey: 'userId',
+    otherKey: 'roleId'
 });
+
+cart.belongsToMany(product, {
+    through: 'cart_products',
+    foreignKey: 'cartId',
+    otherKey: 'productId'
+});
+
+product.belongsToMany(cart, {
+    through: 'cart_products',
+    foreignKey: 'productId',
+    otherKey: 'cartId'
+});
+
+user.hasMany(cart);
+cart.belongsTo(user);
 
 db.category = category;
 db.product = product;
+db.user = user;
+db.role = role;
+db.cart = cart;
 
-module.exports(db);
+module.exports = db;

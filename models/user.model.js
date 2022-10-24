@@ -1,9 +1,9 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize, Sequelize) => {
-    const Product = sequelize.define("product", {
+    const User = sequelize.define("user", {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TINYINT,
             primaryKey: true,
             autoIncrement: true
         },
@@ -11,16 +11,17 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        description: {
-            type: DataTypes.STRING
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        cost:{
-            type: DataTypes.FLOAT,
-            allowNull : false
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
         
     },{
-        tableName: 'products'
+        tableName: 'users'
     });
-    return Product;
+    return User;
 }

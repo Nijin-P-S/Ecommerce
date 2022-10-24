@@ -1,3 +1,7 @@
+/**
+ * @desc : Contains object for creating JWT token
+ */
+
 require('dotenv').config();
 
 module.exports = { 

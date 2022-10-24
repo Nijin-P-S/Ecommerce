@@ -1,31 +1,34 @@
-const {Sequelize} = require('sequelize');
-const dbConfig = require('../configs/db.config')
+/**
+ * @desc: Creates a connection with mysql by authenticating the values from dbconfig file.
+ */
 
-function createConnection(){
-    let sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD,
-    {
-        host : dbConfig.HOST,
-        dialect : dbConfig.dialect,
-        define : {
-            timestamps : false
+const { Sequelize } = require("sequelize");
+const dbConfig = require('../configs/db.config');
+function createConnection() {
+
+    let sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+        host: dbConfig.HOST,
+        dialect: dbConfig.dialect,
+        define: {
+            timestamps: false
         },
-        pool : dbConfig.pool
+        pool: dbConfig.pool
     });
 
     sequelize.authenticate().then(() => {
-        console.log("Connected successfully");
-    }).catch((err)=> {
-        console.log("Error occured in connecting to database");
+        console.log('connected successfully');
+    }).catch((error) => {
+        console.log("error occurred in connecting db", error);
     });
 
-    return {sequelize};
+    return { sequelize }
+
 }
 
-let {sequelize} = createConnection();
+let { sequelize } = createConnection();
 
-function executeWithSync(promiseCallBack){
-    sequelize.sync().then(()=>promiseCallBack);
+function executeWithSync(promiseCallback) {
+    sequelize.sync().then(() => promiseCallback);
 }
 
-module.exports = {sequelize,executeWithSync};
-
+module.exports = { sequelize, executeWithSync };
