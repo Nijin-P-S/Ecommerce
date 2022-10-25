@@ -22,7 +22,7 @@ This project is a Backend of an Ecommerce Application, which has the below defin
  -> Change the Database values in the .env file. <br/>
  -> Type **npm start** in the terminal and enter to run the application.  <br/>
    
- # For DEMO testing. 
+ # Working Model 
  The application is hosted in heroku : "https://ecommerce-api-nijinps.herokuapp.com/". <br/>
  The various API endpoints are :  <br/>
  -> To get all the products : "https://ecommerce-api-nijinps.herokuapp.com/ecomm/api/v1/products". <br/>
