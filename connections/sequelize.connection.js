@@ -2,7 +2,7 @@
  * @desc: Creates a connection with mysql by authenticating the values from dbconfig file.
  */
 
-const { Sequelize } = require("sequelize");
+const {Sequelize} = require("sequelize");
 const dbConfig = require('../configs/db.config');
 function createConnection() {
 
