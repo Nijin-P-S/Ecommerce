@@ -10,7 +10,7 @@ This project is a Backend of an Ecommerce Application, which has the below defin
     
     
  ## Tech Stack
- -> NodeJS. 
+ -> NodeJS.<br/> 
  -> Express. 
  -> MySQL. 
  -> Sequelize. 
