@@ -91,9 +91,3 @@ function init() {
 app.listen(serverConfig.PORT, () => {
     console.log(`APP IS RUNNING ON PORT: ${serverConfig.PORT}`);
 })
-
-/*
-
-/
-
-*/
